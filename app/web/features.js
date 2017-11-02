@@ -2,10 +2,10 @@ const express = require('express');
 
 var router = express.Router();
 
-var FeatureModel = require('../models/features');
+var FeaturesModel = require('../models/features');
 
 router.get('/', function (request, response) {
-  FeatureModel.find().then((features) => {
+  FeaturesModel.find().then((features) => {
     response.send({features});
   }).catch((e) => {
     response.status(400).send(e);
@@ -13,7 +13,7 @@ router.get('/', function (request, response) {
 });
 
 router.post('/', function (request, response) {
-  var feature = new FeatureModel({
+  var feature = new FeaturesModel({
     title: request.body.title
   });
 

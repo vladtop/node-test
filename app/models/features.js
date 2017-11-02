@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var FeatureModel = mongoose.model('feature', {
+var FeaturesModel = mongoose.model('features', {
     title: {
         type: String,
         required: true,
@@ -21,4 +21,4 @@ var FeatureModel = mongoose.model('feature', {
     }
 });
 
-module.exports = FeatureModel
+module.exports = FeaturesModel
