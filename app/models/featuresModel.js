@@ -14,11 +14,7 @@ var FeaturesModel = mongoose.model('features', {
     dateAdded: {
         type: Date,
         default: Date.now
-    },
-    completedAt: {
-        type: Number,
-        default: null
     }
 });
 
-module.exports = FeaturesModel
+module.exports = FeaturesModel;

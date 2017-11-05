@@ -1,10 +1,12 @@
+const config = require('app/config');
 const express = require('express');
 
 var router = express.Router();
 
-var FeaturesModel = require('../models/features');
+var FeaturesModel = require('app/models/featuresModel');
 
-router.get('/', function (request, response) {
+router.get('/', (request, response) => {
+  console.log(config.getLang());
   FeaturesModel.find().then((features) => {
     response.send({features});
   }).catch((e) => {
@@ -12,7 +14,7 @@ router.get('/', function (request, response) {
   });
 });
 
-router.post('/', function (request, response) {
+router.post('/', (request, response) => {
   var feature = new FeaturesModel({
     title: request.body.title
   });
@@ -24,4 +26,4 @@ router.post('/', function (request, response) {
   });
 });
 
-module.exports = router
+module.exports = router;
