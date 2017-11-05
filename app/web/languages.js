@@ -21,7 +21,10 @@ router.post('/', function (request, response) {
   language.save().then((doc) => {
     response.send(doc);
   }).catch((e) => {
-    response.status(400).send(e);
+    response.status(400).send({
+      errorMessage: 'Unable to add new record.',
+      errorCode: e.code
+    });
   });
 });
 

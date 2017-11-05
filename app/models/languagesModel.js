@@ -11,7 +11,9 @@ var LanguagesModel = mongoose.model('languages', {
         type: String,
         required: true,
         minlength: 2,
-        trim: true
+        trim: true,
+        index: true,
+        unique: true
     },
     dateAdded: {
         type: Date,

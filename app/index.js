@@ -7,8 +7,6 @@ const features = require('app/web/features');
 const languages = require('app/web/languages');
 const languagesModel = require('app/models/languagesModel');
 
-global.reqlib = require('app-root-path').require;
-
 // new app
 var app = express();
 

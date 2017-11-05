@@ -6,7 +6,6 @@ var router = express.Router();
 var FeaturesModel = require('app/models/featuresModel');
 
 router.get('/', (request, response) => {
-  console.log(config.getLang());
   FeaturesModel.find().then((features) => {
     response.send({features});
   }).catch((e) => {
@@ -22,7 +21,10 @@ router.post('/', (request, response) => {
   feature.save().then((doc) => {
     response.send(doc);
   }).catch((e) => {
-    response.status(400).send(e);
+    response.status(400).send({
+      errorMessage: 'Unable to add new record.',
+      errorCode: e.code
+    });
   });
 });
 
