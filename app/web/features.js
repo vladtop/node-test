@@ -4,9 +4,10 @@ const express = require('express');
 var router = express.Router();
 
 var FeaturesModel = require('app/models/featuresModel');
+var LanguagesModel = require('app/models/languagesModel');
 
 router.get('/', (request, response) => {
-  FeaturesModel.find().then((features) => {
+  FeaturesModel.find().populate('languages').then((features) => {
     response.send({features});
   }).catch((e) => {
     response.status(400).send(e);
@@ -14,16 +15,23 @@ router.get('/', (request, response) => {
 });
 
 router.post('/', (request, response) => {
-  var feature = new FeaturesModel({
-    title: request.body.title
-  });
+  LanguagesModel.findOne({code: request.body.languageCode}).then((language) => {
+    if (language === null) {
+      throw new Error('Invalid language code provided.');
+    }
+    var feature = new FeaturesModel({
+      title: request.body.title,
+      language: language._id
+    });
 
-  feature.save().then((doc) => {
-    response.send(doc);
+    return feature.save();
+
+  }).then((feature) => {
+    response.send(feature);
   }).catch((e) => {
     response.status(400).send({
-      errorMessage: 'Unable to add new record.',
-      errorCode: e.code
+      errorMessage: e.message || 'Unable to add new record.',
+      //errorCode: e.code
     });
   });
 });

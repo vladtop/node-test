@@ -9,7 +9,8 @@ var FeaturesModel = mongoose.model('features', {
     },
     language: {
         type: mongoose.Schema.Types.ObjectId,
-        required: false
+        required: true,
+        ref: 'languages'
     },
     dateAdded: {
         type: Date,
